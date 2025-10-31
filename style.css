@@ -1,0 +1,500 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Increased base font size for readability */
+    font-size: 17px; 
+    color: var(--text-color);
+    background: var(--bg-gradient);
+    background-size: 400% 400%;
+    animation: gradientFlow 8s ease-in-out infinite; 
+    transition: background 0.5s ease, color 0.5s ease;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Theme variables */
+:root {
+    /* LIGHT MODE: Softer, more balanced gradient */
+    --bg-gradient: linear-gradient(-45deg, #e0f7fa, #c8e6c9, #ffecb3, #ffccbc); 
+    --card-bg: rgba(255, 255, 255, 0.95); 
+    --text-color: #222;
+    --modal-bg: rgba(0, 0, 0, 0.8);
+    --header-bg: rgba(255, 255, 255, 0.4); 
+    --subtitle-color: #795548; /* Earthy accent color */
+}
+
+body.dark {
+    /* DARK MODE: Deeper, atmospheric, slightly gentler Demon Slayer colors */
+    --bg-gradient: linear-gradient(-45deg, #1d1b20, #3e2723, #4a1414, #2a000a); 
+    --card-bg: rgba(20, 20, 20, 0.95); 
+    --text-color: #f0f0f0;
+    --modal-bg: rgba(0, 0, 0, 0.9);
+    --header-bg: rgba(25, 25, 25, 0.8); 
+    --subtitle-color: #f4511e; /* Warmer, less intense fiery accent color */
+}
+
+/* Header */
+header {
+    position: sticky;
+    top: 0;
+    background: var(--header-bg); 
+    backdrop-filter: blur(10px);
+    text-align: center;
+    padding: 1.5rem;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap; 
+}
+
+header h1 {
+    font-size: 2.2rem;
+    /* Deep Violet and Antique Gold/Ivory gradient for a holy feel */
+    background: linear-gradient(90deg, #673ab7, #fffbe0); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(103, 58, 183, 0.5); 
+}
+
+.subtitle-epic {
+    font-size: 1.2rem; 
+    font-style: italic;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    
+    background-image: linear-gradient(90deg, var(--subtitle-color), var(--text-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    text-shadow: 0 0 5px rgba(255, 210, 126, 0.3);
+}
+
+header p {
+    font-size: 1em; 
+    color: var(--text-color);
+}
+
+/* Nav Buttons (Theme Toggle, Home, Hashira Gallery Link) */
+.nav-button, #theme-toggle, header a.nav-button {
+    cursor: pointer;
+    background: none;
+    border: 2px solid var(--subtitle-color); 
+    color: var(--text-color);
+    padding: 0.5rem 1.2rem; 
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-left: 0.5rem;
+    /* For Anchor Tags */
+    text-decoration: none; 
+    display: inline-block; 
+    text-align: center;
+}
+
+#theme-toggle {
+    font-size: 1.5rem;
+    line-height: 1;
+    padding: 0.5rem 1rem;
+}
+
+.nav-button:hover, #theme-toggle:hover, header a.nav-button:hover {
+    background: var(--subtitle-color); 
+    color: var(--card-bg); 
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--subtitle-color); 
+}
+
+#theme-toggle:hover {
+    transform: translateY(-2px) rotate(5deg); 
+}
+
+/* Navigation Button Positioning (Ensuring proper spacing in the header) */
+/* Reset left margin for mobile, controlled by parent gap */
+#hashira-link, #home-button, header a.nav-button {
+    margin-left: 0.5rem; 
+}
+
+/* --- RANK CARDS (index.html) --- */
+#rank-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 1rem;
+    padding: 2rem;
+    flex-grow: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.rank-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 1rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); 
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rank-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.rank-card img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    height: 220px; 
+}
+
+.rank-title {
+    margin-top: 0.8rem;
+    font-size: 1.4rem; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+    color: var(--text-color); 
+}
+
+.rank-description {
+    margin-top: 0.5rem;
+    font-size: 1.05rem; 
+    line-height: 1.6; 
+    color: var(--text-color);
+}
+
+/* --- MODAL --- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--modal-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+    z-index: 100;
+}
+
+.modal.hidden {
+    display: none;
+    opacity: 0; 
+    pointer-events: none;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 700px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    position: relative; 
+    max-height: 90vh; 
+    overflow-y: auto; 
+}
+
+.modal-content img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    max-height: 400px; 
+    object-fit: cover;
+}
+
+.modal-content h2,
+.modal-content p {
+    color: var(--text-color);
+}
+
+.modal-content h2 {
+    font-size: 1.8rem; 
+    margin-bottom: 0.5rem;
+}
+
+.modal-content p {
+    font-size: 1.1rem; 
+    line-height: 1.7; 
+}
+
+#modal-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#modal-close:hover {
+    color: #d18d9f; 
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9em; 
+    opacity: 0.8;
+    margin-top: auto; 
+    color: var(--text-color);
+}
+
+/* Background Animation */
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- HOME PAGE (index.html) AND UTILITIES --- */
+
+/* Utility class for page toggling */
+.hidden {
+    display: none !important;
+}
+
+/* Home Page Styling */
+#home-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1rem; /* Reduced vertical padding for mobile */
+    flex-grow: 1; 
+}
+
+/* Home Hero Image */
+.home-image-area {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.home-hero-image {
+    width: 100%;
+    display: block; 
+    max-height: 40vh; 
+    object-fit: cover;
+}
+
+.home-content {
+    background: var(--card-bg);
+    padding: 2rem 1.5rem; /* Reduced padding for small screens */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+}
+
+.home-content h2 {
+    font-size: 2rem; /* Adjusted size */
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.home-content p {
+    font-size: 1em; /* Adjusted size */
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+/* PRIMARY ACTION BUTTON (View Ranks) */
+.action-button {
+    background: linear-gradient(90deg, #a0522d, #daa520);
+    color: #fff;
+    border: 3px solid #333; 
+    padding: 0.7rem 1.5rem; /* Adjusted size */
+    font-size: 1rem; /* Adjusted size */
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease, box-shadow 0.3s ease; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0; 
+}
+
+.action-button:hover {
+    transform: translateY(-3px); 
+    background: linear-gradient(90deg, #daa520, #a0522d); 
+    box-shadow: 0 0 20px rgba(218, 165, 32, 0.5); 
+}
+
+
+/* Rank List Area setup */
+#rank-list-area {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* --- HASHIRA GALLERY STYLES (Used by GreatestHashiras.html) --- */
+
+#hashira-area {
+    padding: 2rem 1rem; /* Adjusted padding */
+    text-align: center;
+    flex-grow: 1;
+}
+
+#hashira-area h2 {
+    font-size: 2rem; /* Adjusted size */
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    background-image: linear-gradient(90deg, var(--subtitle-color), var(--text-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#hashira-roster {
+    /* Ensures stacking on tiny screens, otherwise 2 columns */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.hashira-card {
+    padding: 1rem; /* Reduced padding */
+}
+
+.hashira-card img {
+    height: 250px; /* Reduced image height for mobile cards */
+}
+
+.hashira-title {
+    font-size: 1.6rem; /* Adjusted size */
+}
+
+/* --- MEDIA QUERIES (Responsiveness) --- */
+
+/* Mobile-Specific Adjustments (Under 600px) */
+@media (max-width: 600px) {
+    
+    /* Header Stacking for Tiny Screens */
+    header {
+        flex-direction: column;
+        gap: 0.8rem;
+        padding: 1rem;
+    }
+
+    /* Group navigation buttons horizontally if they fit */
+    .nav-button, #theme-toggle, header a.nav-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+        margin: 0 0.2rem;
+    }
+
+    /* Title size reduction */
+    header h1 {
+        font-size: 1.8rem;
+    }
+    .subtitle-epic {
+        font-size: 1rem;
+    }
+    
+    /* Card Layouts: Force a single column for very small screens */
+    #rank-container, #hashira-roster {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    /* Rank Cards: Make them slightly taller on their own */
+    .rank-card img {
+        height: 250px; 
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 1rem;
+    }
+}
+
+/* Tablet/Desktop Adjustments (Min-width 768px) */
+@media (min-width: 768px) {
+    /* Ensure 2-3 columns on tablets */
+    #rank-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    #hashira-roster {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    header {
+        flex-direction: row;
+        justify-content: center;
+        padding: 1.5rem;
+    }
+    #hashira-link, #home-button, header a.nav-button {
+        margin-left: 2rem; 
+    }
+}
+
+
+/* Desktop/Large Screens (Min-width 1024px) */
+@media (min-width: 1024px) {
+    
+    /* Home Page Layout Adjustment */
+    #home-area {
+        flex-direction: row; 
+        gap: 4rem;
+        padding: 5rem;
+    }
+
+    .home-image-area {
+        flex: 1; 
+        max-width: 50%; 
+        margin-bottom: 0;
+    }
+
+    .home-hero-image {
+        max-height: 600px; 
+    }
+    
+    .home-content {
+        flex: 1; 
+        max-width: 50%;
+        text-align: left;
+        padding: 3rem;
+    }
+
+    /* Rank List Layout Adjustment: 4 cards per row */
+    #rank-container {
+        grid-template-columns: 1fr 1fr 1fr 1fr; 
+        gap: 2rem;
+        padding: 3rem; 
+    }
+    
+    /* Hashira Roster Adjustment for large screens: 4 Hashira per row */
+    #hashira-roster {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    .rank-card img {
+        /* Adjust height back up for large displays */
+        height: 350px; 
+    }
+
+    .modal-content {
+        max-width: 950px; 
+    }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Slayers Rank Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark">
+    <header>
+        <div class="header-content">
+            <h1>Holy Slayers</h1>
+            <p class="subtitle-epic">A Journey to Sainthood through the Ranks of the Demon Slayer Corps</p>
+        </div>
+        </header>
+
+    <main>
+        <section id="home-area" class="page-section">
+            <div class="home-image-area">
+                <img src="./images/Home Page.png" alt="Holy Slayers Home Image" class="home-hero-image">
+            </div>
+            <div class="home-content">
+                <h2>Welcome, Aspiring Slayer</h2>
+                <p>Track your progression from Mizunoto to Hashira. The path is long, the trials are brutal, but the light of the sun and the resolve of the blade guide our way. Begin your journey.</p>
+                <button id="view-ranks-btn" class="action-button">View Rank Progression</button>
+            </div>
+        </section>
+
+        <section id="rank-list-area" class="page-section hidden">
+            <div id="rank-container">
+                </div>
+        </section>
+        
+    </main>
+    
+    <div id="rank-modal" class="modal hidden">
+        <div class="modal-content">
+            <span id="modal-close">&times;</span>
+            <img id="modal-image" src="" alt="Rank Image">
+            <h2 id="modal-title"></h2>
+            <p id="modal-description"></p>
+            <p id="modal-requirements"></p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Holy Slayers Corps. May your blade find its mark. All images are generated for educational purposes using AI.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
