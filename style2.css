@@ -46,4 +46,13 @@ h2{
             margin-top: 20px;
             border: black 2px solid ;
             border-radius: 10px;
+            max-height: 60%;
+            min-height: auto;
+        }
+
+        .image{
+            background-color: rgb(181, 122, 94);
+            height: 80%;
+            padding-top: 0.1px;
+            padding-bottom: 20px;
         }
